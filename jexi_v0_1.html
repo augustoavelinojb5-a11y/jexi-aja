@@ -1,0 +1,109 @@
+
+<!DOCTYPE html><html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JEXI AJA v.0.1</title>
+<style>
+:root{--azul:#00cfff;--fundo:#030812;--texto:#d9f7ff}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% 30%,#10324b 0%,#06111f 42%,#01040a 100%);color:var(--texto);font-family:Arial,sans-serif;min-height:100vh}
+header{text-align:center;padding:20px 10px 8px}
+h1{font-size:27px;letter-spacing:4px;color:var(--azul);text-shadow:0 0 18px #00bfff;margin:5px}
+.version{font-size:12px;letter-spacing:3px;color:#9bdfff}
+.scene{position:relative;margin:14px auto;width:min(94%,390px);height:340px;border:1px solid #087b9e;border-radius:22px;overflow:hidden;background:radial-gradient(ellipse at center,#12415a 0%,#071522 45%,#02060d 100%);box-shadow:0 0 30px #007da833,inset 0 0 35px #00bfff22}
+.grid{position:absolute;inset:0;background-image:linear-gradient(#00bfff12 1px,transparent 1px),linear-gradient(90deg,#00bfff12 1px,transparent 1px);background-size:24px 24px;transform:perspective(300px) rotateX(8deg);animation:gridmove 12s linear infinite}
+@keyframes gridmove{to{background-position:0 48px}}
+.ring{position:absolute;left:50%;top:48%;width:250px;height:250px;border:1px solid #00cfff55;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 20px #00bfff18;animation:spin 16s linear infinite}
+.ring:before,.ring:after{content:"";position:absolute;inset:16px;border:1px dashed #00cfff66;border-radius:50%}
+.ring:after{inset:34px;border-style:solid}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.face{position:absolute;left:50%;top:48%;width:190px;height:250px;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center}
+.face img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:48% 48% 35% 35%;filter:drop-shadow(0 0 12px #00cfff);animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.placeholder{position:absolute;text-align:center;width:190px;padding:20px 8px;border:1px dashed #00cfff88;border-radius:48% 48% 35% 35%;color:#b8edff;background:#071522aa}
+.placeholder strong{display:block;color:var(--azul);margin-bottom:10px}
+.placeholder span{font-size:12px;line-height:1.5}
+.scan{position:absolute;inset:0;background:linear-gradient(transparent 48%,#00d9ff26 50%,transparent 52%);background-size:100% 9px;pointer-events:none;animation:scan 5s linear infinite}
+@keyframes scan{to{background-position:0 180px}}
+.status{text-align:center;color:#70e8ff;font-size:12px;letter-spacing:2px;margin:12px}
+nav{display:flex;gap:7px;justify-content:center;padding:0 10px;flex-wrap:wrap}
+button{background:#071a2a;color:#bfefff;border:1px solid #087da0;border-radius:10px;padding:11px 13px;font-weight:bold}
+button:active,button.active{background:#063d54;color:white;box-shadow:0 0 15px #00bfff44}
+main{padding:14px;max-width:520px;margin:auto}
+.panel{border:1px solid #0b536d;background:#06111ddd;border-radius:15px;padding:17px;margin:8px 0 18px;box-shadow:0 0 18px #00bfff0d}
+h2{font-size:17px;color:var(--azul);margin-top:0}
+p{font-size:14px;line-height:1.6}
+.small{color:#8bbbd0;font-size:12px}
+.hidden{display:none}
+footer{text-align:center;padding:16px;color:#638da4;font-size:11px}
+</style>
+</head>
+<body>
+<header>
+<h1>JEXI AJA</h1>
+<div class="version">INTELLIGENT HOLOGRAPHIC ASSISTANT · v.0.1</div>
+</header>
+<section class="scene" aria-label="Cenário holográfico tecnológico">
+<div class="grid"></div><div class="ring"></div>
+<div class="face">
+<img id="rosto" src="jexi_rosto.png" alt="Rosto holográfico realista da JEXI AJA" hidden>
+<div id="placeholder" class="placeholder">
+<strong>JEXI AJA</strong>
+<span>Espaço reservado para o rosto holográfico realista.<br>Imagem ainda não instalada.</span>
+</div>
+</div>
+<div class="scan"></div>
+</section>
+<div class="status" id="estado">● SISTEMA VISUAL v.0.1</div>
+<nav>
+<button class="active" onclick="mostrar('criador',this)">Criador e dispositivo</button>
+<button onclick="mostrar('conversas',this)">Conversas</button>
+<button onclick="mostrar('sobre',this)">Sobre a aplicação</button>
+</nav>
+<main>
+<section id="criador" class="panel">
+<h2>Criador e dispositivo</h2>
+<p><b>Criador:</b> AUGUSTO JOÃO AVELINO</p>
+<p><b>Telefone:</b> Samsung Galaxy A03 (SM-A032F)</p>
+<p><b>Android:</b> 13, conforme informação do dispositivo</p>
+<p class="small">Esta interface não altera as definições do telefone.</p>
+</section>
+<section id="conversas" class="panel hidden">
+<h2>Conversas</h2>
+<p id="mensagem">A interface de conversas da JEXI AJA está preparada para a próxima etapa.</p>
+<button onclick="falar()">Testar voz do navegador</button>
+<p class="small">A voz depende do suporte do navegador. Esta versão ainda não está ligada à Groq nem tem escuta contínua.</p>
+</section>
+<section id="sobre" class="panel hidden">
+<h2>Sobre a aplicação</h2>
+<p><b>Nome:</b> JEXI AJA</p>
+<p><b>Versão:</b> v.0.1</p>
+<p><b>Interface:</b> holograma e cenário tecnológico animado</p>
+<p><b>Ligação à IA:</b> ainda não integrada nesta interface</p>
+<p><b>Privacidade:</b> não introduzas palavras-passe nem chaves secretas nesta página.</p>
+</section>
+</main>
+<footer>JEXI AJA v.0.1 · Desenvolvido por AUGUSTO JOÃO AVELINO</footer>
+<script>
+function mostrar(id,botao){
+document.querySelectorAll('main .panel').forEach(p=>p.classList.add('hidden'));
+document.getElementById(id).classList.remove('hidden');
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+botao.classList.add('active');
+}
+function falar(){
+if(!('speechSynthesis' in window)){document.getElementById('mensagem').textContent='Este navegador não disponibiliza voz.';return;}
+speechSynthesis.cancel();
+let voz=new SpeechSynthesisUtterance('Olá, Avelino. Sou a JEXI AJA, versão zero ponto um.');
+voz.lang='pt-PT';
+speechSynthesis.speak(voz);
+document.getElementById('estado').textContent='● JEXI AJA A FALAR';
+voz.onend=()=>document.getElementById('estado').textContent='● SISTEMA VISUAL v.0.1';
+}
+const rosto=document.getElementById('rosto');
+rosto.onload=()=>{rosto.hidden=false;document.getElementById('placeholder').hidden=true;};
+rosto.onerror=()=>{rosto.hidden=true;document.getElementById('placeholder').hidden=false;};
+</script>
+</body>
+</html>
